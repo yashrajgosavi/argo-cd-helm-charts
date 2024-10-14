@@ -1,0 +1,13 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ahq-grid-server-pdb
+  labels:
+    app: {{.Values.name}}
+    tier: backend
+    env: {{.Values.environment}}
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: {{.Values.name}}
