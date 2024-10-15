@@ -1,5 +1,0 @@
-project: ahq-dev
-name: auth-services
-repoURL: https://bitbucket.org/taf-global/kubernetes-argocd-apps.git
-namespace: ahq-dev
-server: https://kubernetes.default.svc
