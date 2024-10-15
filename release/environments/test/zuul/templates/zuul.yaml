@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.name }}
+  namespace: argocd
+spec:
+  project: {{ .Values.project }}
+  source:
+    repoURL: {{ .Values.repoURL }}
+    targetRevision: main
+    path: release/charts/zuul
+  destination:
+    server: {{ .Values.server }}
+    namespace: {{ .Values.namespace }}

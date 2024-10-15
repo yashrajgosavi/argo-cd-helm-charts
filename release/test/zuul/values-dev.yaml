@@ -1,0 +1,9 @@
+name: zuul
+tier: backend
+parent: ahq-backend
+component: api
+image: 501429054313.dkr.ecr.us-east-2.amazonaws.com/zuul-api-gateway
+imageTag: 41
+imagePullPolicy: Always
+containerPort: 80
+replicas: 1
