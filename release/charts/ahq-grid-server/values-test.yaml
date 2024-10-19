@@ -2,7 +2,7 @@ name: ahq-grid-server
 tier: backend
 parent: ahq-backend
 component: api
-image: yashrajgosavi/selenoid-image
+image: aerokube/moon
 imageTag: latest
 imagePullPolicy: Always
 containerPort: 4444
