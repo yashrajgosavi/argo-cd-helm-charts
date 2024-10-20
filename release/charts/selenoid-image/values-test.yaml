@@ -1,4 +1,4 @@
-name: ahq-grid-server
+name: selenoid-image
 tier: backend
 parent: ahq-backend
 component: api
