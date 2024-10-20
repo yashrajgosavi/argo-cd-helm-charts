@@ -1,0 +1,21 @@
+name: ahq-grid-server
+tier: backend
+parent: ahq-backend
+component: api
+image: brewacr.azurecr.io/selenoid-image
+imageTag: latest
+imagePullSecrets: azure-acr-secret
+imagePullPolicy: Always
+containerPort: 4444
+configname: selenoid-image-test-configmap
+replicas: 1
+environment: test
+resources:
+  requests:
+    memory: "200Mi"
+    cpu: "100m"
+  limits:
+    memory: "300Mi"
+    cpu: "1000m"
+#####################
+data:
