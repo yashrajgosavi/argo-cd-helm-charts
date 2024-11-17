@@ -5,7 +5,7 @@ customIngress:
   enabled: false
   annotations: {}
   ingressClassName: nginx
-  host: localhost
+  host: inspired-friendly-cougar.ngrok-free.app
   tls: []
   #- secretName: moon-tls
   #  hosts:
@@ -41,7 +41,7 @@ ingress:
   ##
   ## Ingress host. Replace this with your domain name.
   ##
-  host: localhost
+  host: inspired-friendly-cougar.ngrok-free.app
 
   ##
   ## Ingress class name
