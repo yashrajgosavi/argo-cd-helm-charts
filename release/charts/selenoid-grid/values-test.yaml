@@ -3,7 +3,7 @@ tier: backend
 parent: ahq-backend
 component: api
 image: yashrajgosavi/selenoid-docker
-imageTag: v1
+imageTag: latest
 securityContext:
   privileged: true
 capabilities:

@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: git@github.com:yashrajgosavi/argo-cd-helm-charts.git
+      repoURL: https://github.com/yashrajgosavi/argo-cd-helm-charts
       revision: main
       directories:
       - path: release/charts/*
@@ -25,7 +25,7 @@ spec:
         helm:
           valueFiles:
             - values-prod.yaml
-        repoURL: git@github.com:yashrajgosavi/argo-cd-helm-charts.git
+        repoURL: https://github.com/yashrajgosavi/argo-cd-helm-charts
         targetRevision: main
         path: '{{path}}'
       destination:
