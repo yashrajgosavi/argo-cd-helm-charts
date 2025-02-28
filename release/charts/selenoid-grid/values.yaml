@@ -1,0 +1,11 @@
+name: selenoid-grid
+tier: backend
+parent: ahq-backend
+component: api
+image: yashrajgosavi/selenoid-docker
+imageTag: v1
+securityContext:
+  privileged: true
+imagePullPolicy: Always
+containerPort: 8080
+replicas: 1

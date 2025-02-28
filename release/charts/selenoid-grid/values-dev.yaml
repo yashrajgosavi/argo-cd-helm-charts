@@ -1,0 +1,9 @@
+name: selenoid-grid
+tier: backend
+parent: ahq-backend
+component: api
+image: 501429054313.dkr.ecr.us-east-2.amazonaws.com/selenoid-grid
+imageTag: latest
+imagePullPolicy: Always
+containerPort: 8080
+replicas: 1

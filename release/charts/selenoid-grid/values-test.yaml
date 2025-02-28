@@ -1,0 +1,26 @@
+name: selenoid-grid
+tier: backend
+parent: ahq-backend
+component: api
+image: 501429054313.dkr.ecr.us-east-2.amazonaws.com/selenoid-grid
+imageTag: 14
+securityContext:
+  privileged: true
+capabilities:
+  add:
+    - ALL
+runAsUser: 0
+readOnlyRootFilesystem: false
+imagePullPolicy: Always
+containerPort: 4444
+replicas: 1
+configname: selenoid-grid-test-configmap
+environment: test
+resources:
+  requests:
+    memory: "600Mi"
+    cpu: "500m"
+  limits:
+    memory: "1600Mi"
+    cpu: "1"
+data:
