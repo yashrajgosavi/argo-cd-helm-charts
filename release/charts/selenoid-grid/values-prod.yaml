@@ -2,10 +2,17 @@ name: selenoid-grid
 tier: backend
 parent: ahq-backend
 component: api
-image: 501429054313.dkr.ecr.us-east-2.amazonaws.com/selenoid-grid
-imageTag: latest
+image: yashrajgosavi/selenoid-docker
+imageTag: v1
+securityContext:
+  privileged: true
+capabilities:
+  add:
+    - ALL
+runAsUser: 0
+readOnlyRootFilesystem: false
 imagePullPolicy: Always
-containerPort: 8080
+containerPort: 4444
 replicas: 1
 configname: selenoid-grid-prod-configmap
 environment: prod
@@ -15,5 +22,5 @@ resources:
     cpu: "500m"
   limits:
     memory: "1600Mi"
-    cpu: "1000m"
+    cpu: "1"
 data:

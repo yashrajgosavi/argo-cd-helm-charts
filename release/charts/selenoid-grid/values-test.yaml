@@ -2,8 +2,8 @@ name: selenoid-grid
 tier: backend
 parent: ahq-backend
 component: api
-image: 501429054313.dkr.ecr.us-east-2.amazonaws.com/selenoid-grid
-imageTag: 14
+image: yashrajgosavi/selenoid-docker
+imageTag: v1
 securityContext:
   privileged: true
 capabilities:
