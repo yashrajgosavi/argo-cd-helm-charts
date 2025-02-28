@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ahq-backend-test
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: git@bitbucket.org:taf-global/kubernetes-argocd-apps.git
+      revision: main
+      directories:
+      - path: release/charts/*
+      - exclude: true      
+        path: release/charts/addon-apps
+  template:
+    metadata:
+      name: '{{path.basename}}-test'
+    spec:
+      project: ahq-test
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        helm:
+          valueFiles:
+            - values-test.yaml
+        repoURL: git@bitbucket.org:taf-global/kubernetes-argocd-apps.git
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: ahq-test
