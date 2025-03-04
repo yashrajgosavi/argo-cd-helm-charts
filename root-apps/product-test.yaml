@@ -6,12 +6,12 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/yashrajgosavi/argo-cd-helm-charts
+      repoURL: git@github.com:yashrajgosavi/argo-cd-helm-charts.git
       revision: main
       directories:
-      - path: release/charts/*
+      - path: apps/release/*
       - exclude: true      
-        path: release/charts/addon-apps
+        path: apps/backup/
   template:
     metadata:
       name: '{{path.basename}}-test'
@@ -25,9 +25,10 @@ spec:
         helm:
           valueFiles:
             - values-test.yaml
-        repoURL: https://github.com/yashrajgosavi/argo-cd-helm-charts
+        repoURL: git@github.com:yashrajgosavi/argo-cd-helm-charts.git
         targetRevision: main
         path: '{{path}}'
       destination:
+        name: in-cluster
         server: https://kubernetes.default.svc
         namespace: product-test
