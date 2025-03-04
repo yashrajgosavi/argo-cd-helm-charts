@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: ahq-backend-prod
+  name: product-backend-test
   namespace: argocd
 spec:
   generators:
@@ -14,9 +14,9 @@ spec:
         path: release/charts/addon-apps
   template:
     metadata:
-      name: '{{path.basename}}-prod'
+      name: '{{path.basename}}-test'
     spec:
-      project: ahq-prod
+      project: product-test
       syncPolicy:
         automated:
           prune: true
@@ -24,10 +24,10 @@ spec:
       source:
         helm:
           valueFiles:
-            - values-prod.yaml
+            - values-test.yaml
         repoURL: https://github.com/yashrajgosavi/argo-cd-helm-charts
         targetRevision: main
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: ahq-prod
+        namespace: product-test

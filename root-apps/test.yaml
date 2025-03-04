@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: ahq-backend-dev
+  name: product-backend
   namespace: argocd
 spec:
   generators:
@@ -14,7 +14,7 @@ spec:
     metadata:
       name: '{{path.basename}}-dev'
     spec:
-      project: ahq-dev
+      project: product-dev
       syncPolicy:
         automated:
           prune: true
@@ -28,4 +28,4 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: ahq-dev
+        namespace: product-dev

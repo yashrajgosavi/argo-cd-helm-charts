@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: ahq-test
+  name: product-test
   namespace: argocd
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
@@ -17,7 +17,7 @@ spec:
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   # Destination clusters can be identified by 'server', 'name', or both.
   destinations:
-  - namespace: ahq-test
+  - namespace: product-test
     server: https://kubernetes.default.svc
     name: in-cluster
 

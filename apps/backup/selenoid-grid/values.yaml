@@ -1,6 +1,6 @@
 name: selenoid-grid
 tier: backend
-parent: ahq-backend
+parent: product-backend
 component: api
 image: yashrajgosavi/selenoid-docker
 imageTag: v1
