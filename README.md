@@ -1,31 +1,31 @@
 # argo-cd-helm-charts
 
 
-kubectl apply -f release/root-apps/product-test.yaml -n argocd
+kubectl apply -f release/root-apps/test.yaml -n argocd
 
-kubectl delete -f release/root-apps/product-test.yaml -n argocd
-
-
-
-kubectl apply -f release/root-apps/product-prod.yaml -n argocd
-
-kubectl delete -f release/root-apps/product-prod.yaml -n argocd
+kubectl delete -f release/root-apps/test.yaml -n argocd
 
 
 
-kubectl apply -f release/rolebinding/product-test-rb.yaml
+kubectl apply -f release/root-apps/prod.yaml -n argocd
 
-kubectl delete -f release/rolebinding/product-test-rb.yaml
-
-kubectl get rolebinding product-test-rb -n product-test
+kubectl delete -f release/root-apps/prod.yaml -n argocd
 
 
 
-kubectl apply -f release/rolebinding/product-prod-rb.yaml
+kubectl apply -f release/rolebinding/test-rb.yaml
 
-kubectl delete -f release/rolebinding/product-prod-rb.yaml
+kubectl delete -f release/rolebinding/test-rb.yaml
 
-kubectl get rolebinding product-prod-rb -n product-prod
+kubectl get rolebinding test-rb -n test
+
+
+
+kubectl apply -f release/rolebinding/prod-rb.yaml
+
+kubectl delete -f release/rolebinding/prod-rb.yaml
+
+kubectl get rolebinding prod-rb -n prod
 
 
 

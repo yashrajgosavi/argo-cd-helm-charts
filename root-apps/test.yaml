@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: product-backend-prod
+  name: backend-test
   namespace: argocd
 spec:
   generators:
@@ -14,9 +14,9 @@ spec:
         path: apps/backup/
   template:
     metadata:
-      name: '{{path.basename}}-prod'
+      name: '{{path.basename}}-test'
     spec:
-      project: product-prod
+      project: test
       syncPolicy:
         automated:
           prune: true
@@ -24,11 +24,11 @@ spec:
       source:
         helm:
           valueFiles:
-            - values-prod.yaml
+            - values-test.yaml
         repoURL: git@github.com:yashrajgosavi/argo-cd-helm-charts.git
         targetRevision: main
         path: '{{path}}'
       destination:
         name: in-cluster
         server: https://kubernetes.default.svc
-        namespace: product-prod
+        namespace: test
