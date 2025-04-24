@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.name }}
+    app.kubernetes.io/version: 1.0.0
+    app.kubernetes.io/component: {{ .Values.component }}
+    app.kubernetes.io/part-of: {{ .Values.parent }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+        tier: {{ .Values.tier }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        env:
+        - name: JVM_OPTS
+          value: "-Xmx128M"        
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.configname }}            
+        resources: 
+          {{ .Values.resources | toYaml | nindent 10 | trim }}     
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        readinessProbe:
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          httpGet:
+            scheme: HTTP
+            path: /actuator/health
+            port: {{ .Values.containerPort }}
+#        livenessProbe: 
+#          httpGet: 
+#            path: /test
+#            port: {{ .Values.containerPort }}
