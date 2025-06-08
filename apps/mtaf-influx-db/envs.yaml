@@ -1,3 +1,6 @@
 environments:
   - name: test
     valuesFile: values-test.yaml
+
+  - name: prod
+    valuesFile: values-prod.yaml
