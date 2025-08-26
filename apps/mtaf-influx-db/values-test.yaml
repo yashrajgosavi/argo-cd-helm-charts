@@ -20,15 +20,14 @@ resources:
     cpu: "250m"
     memory: "256Mi"
 
-# ✅ Ingress configuration
 ingress:
   enabled: true
-  className: nginx
-  host: api.yokai.com
-  serviceName: backend-service
-  servicePort: 8086
-  path: /mtaf-influx-db-test
-  rewriteTarget: /$2
+  certManager: false
+  annotations:
+  hosts:
+  - name: api.yokai.com
+    path: /mtaf-influx-db-test
+    tls: false
 #####################
 # ✅ Environment variables passed into the container
 env:
