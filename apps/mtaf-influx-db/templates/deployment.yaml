@@ -23,8 +23,12 @@ spec:
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         env:
-        - name: JVM_OPTS
-          value: "-Xmx128M"        
+          - name: JVM_OPTS
+            value: "-Xmx128M"
+          {{- range .Values.env }}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+          {{- end }}
         envFrom:
           - configMapRef:
               name: {{ .Values.configname }}            
