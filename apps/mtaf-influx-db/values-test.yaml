@@ -42,7 +42,7 @@ ingress:
 
   # --- Host-based routing ---
   hosts:
-    - host: influx.test.local   # change to your domain
+    - host: influx.test.app.yokai.com   # change to your domain
       paths:
         - path: /
           pathType: Prefix
