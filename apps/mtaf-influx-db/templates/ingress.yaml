@@ -22,8 +22,10 @@ spec:
       paths:
       - path: {{ default "/" .path }}
         backend:
-          serviceName: {{ .Values.ingress.serviceName }}
-          servicePort: http
+          service:
+            name: {{ .Values.ingress.serviceName }}
+            port:
+              number: {{ .Values.ingress.servicePort }}
   {{- end }}
   tls:
   {{- range .Values.ingress.hosts }}
