@@ -20,16 +20,6 @@ resources:
     cpu: "250m"
     memory: "256Mi"
 
-# ✅ Ingress configuration
-ingress:
-  enabled: true
-  className: nginx
-  host: api.yokai.com
-  serviceName: backend-service
-  servicePort: 8086
-  path: /mtaf-influx-db-test
-  rewriteTarget: /$2
-#####################
 # ✅ Environment variables passed into the container
 env:
   - name: DOCKER_INFLUXDB_INIT_MODE
@@ -42,4 +32,28 @@ env:
     value: "mtaf"
   - name: DOCKER_INFLUXDB_INIT_BUCKET
     value: "jmeter-results"
-data:
+
+data: {}
+
+# ✅ Ingress Configuration (choose host or path or both)
+ingress:
+  enabled: true
+  className: nginx
+
+  # --- Host-based routing ---
+  hosts:
+    - host: influx.test.local   # change to your domain
+      paths:
+        - path: /
+          pathType: Prefix
+          service:
+            name: mtaf-influx-db
+            port: 8086
+
+  # --- Path-based routing ---
+  defaultPaths:
+    - path: /influxdb
+      pathType: Prefix
+      service:
+        name: mtaf-influx-db
+        port: 8086
