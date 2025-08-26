@@ -40,20 +40,5 @@ ingress:
   enabled: true
   className: nginx
 
-  # --- Host-based routing ---
-  hosts:
-    - host: influx.test.app.yokai.com   # change to your domain
-      paths:
-        - path: /
-          pathType: Prefix
-          service:
-            name: mtaf-influx-db
-            port: 8086
-
-  # --- Path-based routing ---
-  defaultPaths:
-    - path: /influxdb
-      pathType: Prefix
-      service:
-        name: mtaf-influx-db
-        port: 8086
+  # Domain
+  baseDomain: app.yokai.com

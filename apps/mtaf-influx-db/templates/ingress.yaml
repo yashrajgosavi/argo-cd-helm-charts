@@ -11,31 +11,27 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className | default "nginx" | quote }}
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host }}
+    # --- Host-based routing (appname.app.yokai.com) ---
+    - host: {{ .Values.name }}.{{ .Values.ingress.baseDomain }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: /
+            pathType: Prefix
             backend:
               service:
-                name: {{ .service.name }}
+                name: {{ .Values.name }}
                 port:
-                  number: {{ .service.port }}
-          {{- end }}
-    {{- end }}
-    {{- if .Values.ingress.defaultPaths }}
-    - http:
+                  number: {{ .Values.containerPort }}
+
+    # --- Path-based routing (app.yokai.com/appname) ---
+    - host: {{ .Values.ingress.baseDomain }}
+      http:
         paths:
-          {{- range .Values.ingress.defaultPaths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: /{{ .Values.name }}
+            pathType: Prefix
             backend:
               service:
-                name: {{ .service.name }}
+                name: {{ .Values.name }}
                 port:
-                  number: {{ .service.port }}
-          {{- end }}
-    {{- end }}
+                  number: {{ .Values.containerPort }}
 {{- end }}
