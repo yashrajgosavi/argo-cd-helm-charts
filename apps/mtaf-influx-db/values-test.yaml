@@ -20,7 +20,6 @@ resources:
     cpu: "250m"
     memory: "256Mi"
 
-# ✅ Environment variables passed into the container
 env:
   - name: DOCKER_INFLUXDB_INIT_MODE
     value: "setup"
@@ -35,7 +34,6 @@ env:
 
 data: {}
 
-# ✅ Ingress Configuration (choose host or path or both)
 ingress:
   enabled: true
   className: nginx
