@@ -24,6 +24,7 @@ ingress:
   enabled: true
   certManager: false
   annotations:
+  serviceName: backend-service
   hosts:
   - name: api.yokai.com
     path: /mtaf-influx-db-test
