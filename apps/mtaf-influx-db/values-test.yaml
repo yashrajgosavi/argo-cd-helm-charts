@@ -23,8 +23,7 @@ ingress:
   hosts:
     - host: api.yokai.com
       paths:
-        - path: /mtaf-influx-db
-          pathType: ImplementationSpecific
+        - path: /mtaf-influx-db-test
           service:
             name: backend-service
             port: 8086
