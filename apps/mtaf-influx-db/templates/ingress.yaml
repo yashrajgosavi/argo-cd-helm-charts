@@ -15,6 +15,16 @@ spec:
       http:
         paths:
           {{- range .paths }}
+          # Exact path (base path, no rewrite)
+          - path: {{ .path }}
+            pathType: Exact
+            backend:
+              service:
+                name: {{ .service.name }}
+                port:
+                  number: {{ .service.port }}
+
+          # Regex path (for subpaths, with rewrite)
           - path: {{ .path }}(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
