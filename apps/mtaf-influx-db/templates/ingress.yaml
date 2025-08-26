@@ -5,33 +5,19 @@ metadata:
   name: {{ .Values.name }}-ingress
   namespace: {{ .Release.Namespace }}
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.ingress.rewriteTarget }}
 spec:
-  ingressClassName: {{ .Values.ingress.className | quote }}
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
-          {{- range .paths }}
-          # Exact path (base path, no rewrite)
-          - path: {{ .path }}
-            pathType: Exact
-            backend:
-              service:
-                name: {{ .service.name }}
-                port:
-                  number: {{ .service.port }}
-
-          # Regex path (for subpaths, with rewrite)
-          - path: {{ .path }}(/|$)(.*)
+          - path: {{ .Values.ingress.path }}
             pathType: ImplementationSpecific
             backend:
               service:
-                name: {{ .service.name }}
+                name: {{ .Values.ingress.serviceName }}
                 port:
-                  number: {{ .service.port }}
-          {{- end }}
-    {{- end }}
+                  number: {{ .Values.ingress.servicePort }}
 {{- end }}

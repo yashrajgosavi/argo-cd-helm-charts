@@ -1,42 +1,45 @@
-name: mtaf-influx-db
+component: api
 tier: backend
 parent: backend
-component: api
+environment: test
+
+name: mtaf-influx-db
 image: influxdb
 imageTag: latest
 imagePullPolicy: Always
 containerPort: 8086
-configname: mtaf-influx-db-test-configmap
 replicas: 1
-environment: test
-resources:
-  requests:
-    memory: "200Mi"
-    cpu: "100m"
-  limits:
-    memory: "300Mi"
-    cpu: "500m"
 
+configname: mtaf-influx-db-test-configmap
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+
+# ✅ Ingress configuration
 ingress:
   enabled: true
   className: nginx
-  hosts:
-    - host: api.yokai.com
-      paths:
-        - path: /mtaf-influx-db-test
-          service:
-            name: backend-service
-            port: 8086
+  host: api.yokai.com
+  serviceName: backend-service
+  servicePort: 8086
+  path: /mtaf-influx-db-test(/|$)(.*)
+  rewriteTarget: /$2
 #####################
+# ✅ Environment variables passed into the container
 env:
   - name: DOCKER_INFLUXDB_INIT_MODE
-    value: setup
+    value: "setup"
   - name: DOCKER_INFLUXDB_INIT_USERNAME
-    value: rajesh23427
+    value: "rajesh23427"
   - name: DOCKER_INFLUXDB_INIT_PASSWORD
-    value: Automation@1234
+    value: "Automation@1234"
   - name: DOCKER_INFLUXDB_INIT_ORG
-    value: mtaf
+    value: "mtaf"
   - name: DOCKER_INFLUXDB_INIT_BUCKET
-    value: jmeter-results
+    value: "jmeter-results"
 data:
