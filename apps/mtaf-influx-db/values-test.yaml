@@ -27,7 +27,7 @@ ingress:
   host: api.yokai.com
   serviceName: backend-service
   servicePort: 8086
-  path: /mtaf-influx-db-test(/|$)(.*)
+  path: /mtaf-influx-db-test
   rewriteTarget: /$2
 #####################
 # ✅ Environment variables passed into the container
